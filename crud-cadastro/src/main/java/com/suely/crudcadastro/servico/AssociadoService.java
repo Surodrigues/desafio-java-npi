@@ -24,14 +24,14 @@ public class AssociadoService {
         List<Associado> associados = repo.findAll();
 
         for(Associado a : associados){
-            System.out.println(a.getNomeAssociado());
+            System.out.println(a.getNome());
         }
         return repo.findAll();
     }
 
     // PROCURAR POR CPF ==================
     public Associado procurarAssociado(Long cpfAssociado){
-        return repo.findByIdAssociado(cpfAssociado);
+        return repo.findByCpf(cpfAssociado);
     }
     
     // EDITAR ====================

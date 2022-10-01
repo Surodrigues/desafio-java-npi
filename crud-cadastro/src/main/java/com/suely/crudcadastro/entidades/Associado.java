@@ -14,15 +14,15 @@ import javax.persistence.OneToMany;
 @Entity
 public class Associado {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idAssociado;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(unique = true, nullable = false)
-    private Long cpfAssociado;
+    private Long cpf;
     @Column(nullable = false, length = 50)
-    private String nomeAssociado;    
+    private String nome;    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "associado")
     private Set<Dependente> dependentes;
-    @Column(nullable = false, precision = 5, scale = 2)
+    @Column(nullable = false, precision = 7, scale = 2)
     private BigDecimal renda;
     private boolean ativo;
 
@@ -31,31 +31,34 @@ public class Associado {
     // CONTRUTOR ======================================
     public Associado(){};    
 
-    public Associado(Long cpfAssociado, String nomeAssociado, BigDecimal renda) {
-        this.cpfAssociado = cpfAssociado;
-        this.nomeAssociado = nomeAssociado;
+    public Associado(Long cpf, String nome, BigDecimal renda) {
+        this.cpf = cpf;
+        this.nome = nome;
         this.renda = renda;
         this.ativo = true;
     }
 
 
     // GETTERS E SETTERS ==============================
-    public Long getIdAssociado() {
-        return idAssociado;
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Long getCpfAssociado() {
-        return cpfAssociado;
+    public Long getCpf() {        
+        return cpf;
     }
-    public void setCpfAssociado(Long cpfAssociado) {
-        this.cpfAssociado = cpfAssociado;
+    public void setCpf(Long cpf) {
+        this.cpf = cpf;
     }
 
-    public String getNomeAssociado() {
-        return nomeAssociado;
+    public String getNome() {
+        return nome;
     }
-    public void setNomeAssociado(String nomeAssociado) {
-        this.nomeAssociado = nomeAssociado;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Set<Dependente> getDependentes() {
@@ -87,8 +90,8 @@ public class Associado {
         
     @Override
     public String toString() {
-        return "Associado [ativo=" + this.isAtivo() + ", cpfAssociado=" + cpfAssociado + ", idAssociado=" + idAssociado
-                + ", nomeAssociado=" + nomeAssociado + ", renda=" + renda + "]";
+        return "Associado [ativo=" + this.isAtivo() + ", cpf=" + cpf + ", id=" + id
+                + ", nome=" + nome + ", renda=" + renda + "]";
     }
 
 }
