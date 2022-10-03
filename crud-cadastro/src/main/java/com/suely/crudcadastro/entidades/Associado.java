@@ -1,7 +1,7 @@
 package com.suely.crudcadastro.entidades;
 
 import java.math.BigDecimal;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,83 +15,95 @@ import javax.persistence.OneToMany;
 public class Associado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(unique = true, nullable = false)
-    private Long cpf;
-    @Column(nullable = false, length = 50)
-    private String nome;    
+    @Column(name = "id_associado")
+    private Long idAssociado;
+    @Column(name = "cpf_associado", unique = true, nullable = false)
+    private Long cpfAssociado;
+    @Column(name = "nome_associado", nullable = false, length = 50)
+    private String nomeAssociado;    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "associado")
-    private Set<Dependente> dependentes;
+    private List<Dependente> dependentes;
     @Column(nullable = false, precision = 7, scale = 2)
     private BigDecimal renda;
-    private boolean ativo;
+    private boolean ativo = true;
 
-        
+
 
     // CONTRUTOR ======================================
     public Associado(){};    
 
     public Associado(Long cpf, String nome, BigDecimal renda) {
-        this.cpf = cpf;
-        this.nome = nome;
+        this.cpfAssociado = cpf;
+        this.nomeAssociado = nome;
         this.renda = renda;
-        this.ativo = true;
     }
 
 
     // GETTERS E SETTERS ==============================
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdAssociado() {
+        return idAssociado;
     }
 
-    public Long getCpf() {        
-        return cpf;
-    }
-    public void setCpf(Long cpf) {
-        this.cpf = cpf;
+    public void setIdAssociado(Long idAssociado) {
+        this.idAssociado = idAssociado;
     }
 
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
+    public Long getCpfAssociado() {
+        return cpfAssociado;
     }
 
-    public Set<Dependente> getDependentes() {
+    public void setCpfAssociado(Long cpfAssociado) {
+        this.cpfAssociado = cpfAssociado;
+    }
+
+    public String getNomeAssociado() {
+        return nomeAssociado;
+    }
+
+    public void setNomeAssociado(String nomeAssociado) {
+        this.nomeAssociado = nomeAssociado;
+    }
+
+    public List<Dependente> getDependentes() {
         return dependentes;
     }
-    public void setDependentes(Set<Dependente> dependentes) {
+
+    public void setDependentes(List<Dependente> dependentes) {
         this.dependentes = dependentes;
     }
 
     public BigDecimal getRenda() {
         return renda;
     }
+
     public void setRenda(BigDecimal renda) {
         this.renda = renda;
     }
+   
 
     public boolean isAtivo() {
         if(this.ativo){
             System.out.println("ativo");
-        }else{
+        } else {
             System.out.println("inativo");
         }
         return ativo;
     }
+
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 
+    
         
     @Override
     public String toString() {
-        return "Associado [ativo=" + this.isAtivo() + ", cpf=" + cpf + ", id=" + id
-                + ", nome=" + nome + ", renda=" + renda + "]";
+        return "Associado [ativo=" + this.isAtivo() + ", cpf=" + cpfAssociado + ", id=" + idAssociado
+                + ", nome=" + nomeAssociado + ", renda=" + renda + "]";
     }
+
+    
+
+    
 
 }

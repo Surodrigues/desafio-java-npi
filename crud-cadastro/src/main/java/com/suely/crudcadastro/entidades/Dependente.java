@@ -11,41 +11,49 @@ import javax.persistence.ManyToOne;
 public class Dependente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_dependente")
     private Long idDependente;
-    @Column(unique = true)
+    @Column(name = "cpf_dependente", unique = true)
     private Long cpfDependente;
-    @Column(length = 50, nullable = false)
+    @Column(name = "nome_dependente", length = 50, nullable = false)
     private String nomeDependente;
     @ManyToOne(optional = false)
     private Associado associado;
     @Column(nullable = false)
     private int idade;
 
-    
+
 
     // CONTRUTOR =========================================
-    public Dependente(){};
+    public Dependente(){}
 
-    public Dependente(Long cpfDependente, String nomeDependente, Associado associado, int idade) {
-        this.cpfDependente = cpfDependente;
-        this.nomeDependente = nomeDependente;
-        this.associado = associado;
+
+    public Dependente(Long cpf, String nome, int idade) {
+        this.cpfDependente = cpf;
+        this.nomeDependente = nome;
         this.idade = idade;
     }
 
 
+
+    
     // GETTERS E SETTERS =================================
-    public long getIdDependente() {
+    public Long getIdDependente() {
         return idDependente;
     }
+    public void setIdDependente(Long idDependente) {
+        this.idDependente = idDependente;
+    }
 
-    public long getCpfDependente() {
+
+    public Long getCpfDependente() {
         return cpfDependente;
     }
     public void setCpfDependente(Long cpfDependente) {
         this.cpfDependente = cpfDependente;
     }
+
 
     public String getNomeDependente() {
         return nomeDependente;
@@ -54,6 +62,7 @@ public class Dependente {
         this.nomeDependente = nomeDependente;
     }
 
+
     public Associado getAssociado() {
         return associado;
     }
@@ -61,18 +70,36 @@ public class Dependente {
         this.associado = associado;
     }
 
-    public int getIdade(){
+    
+
+
+    // MÉTODO QUE RETORNA A ID DO ASSOCIADO DESTE DEPENDENTE ==================
+    public Long getThisAssociadoId(Associado a) {        
+        Long associadoId = this.associado.getIdAssociado();
+        return associadoId;
+    }
+    // ==========================
+
+
+
+    public int getIdade() {
         return idade;
     }
-    public void setIdade(int idade){
+    public void setIdade(int idade) {
         this.idade = idade;
     }
 
-    
+
+        
     // TOSTRING ==========================================
     @Override
     public String toString() {
-        return "Dependente [associado=" + associado + ", cpfDependente=" + cpfDependente + ", idDependente="
-                + idDependente + ", nomeDependente=" + nomeDependente + ", idade=" + idade + "]";
+        return "Dependente [id=" + idDependente + ", cpf=" + cpfDependente + ", nome=" + nomeDependente + ", associado=" + associado + ", idade="
+                + idade + "]";
     }
+
+
+    
+
+    
 }

@@ -12,7 +12,8 @@ import com.suely.crudcadastro.repositorio.DependenteRepository;
 public class DependenteService {
 
     @Autowired
-    DependenteRepository repo;
+    DependenteRepository repo;   
+
     
 
     // ADICIONAR
@@ -20,14 +21,13 @@ public class DependenteService {
         repo.save(dependente);
     }    
 
-    // LISTAR DEPENDENTES DO ASSOCIADO ==========
+    // LISTAR DEPENDENTES DO ASSOCIADO PELA ID DO ASSOCIADO==========
     public List<Dependente> listarDependentes(Long idAssociado){
-        List<Dependente> dependentes = repo.findByAssociado(idAssociado);
-        for(Dependente d : dependentes){
-            System.out.println(d.getNomeDependente());
-        }
-        return repo.findByAssociado(idAssociado);
+        return repo.findByAssociadoIdAssociado(idAssociado);
+
     }
+
+    
 
     // PROCURAR POR CPF
     public Dependente procurarDependente(Long cpfDependente){

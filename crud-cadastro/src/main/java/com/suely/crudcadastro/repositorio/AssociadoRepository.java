@@ -8,5 +8,8 @@ import com.suely.crudcadastro.entidades.Associado;
 @Repository
 public interface AssociadoRepository extends JpaRepository<Associado, Long>{
 
-    Associado findByCpf(Long cpf);
+    Associado findByCpfAssociado(Long cpfAssociado);
+
+    Associado findByIdAssociado(Long idAssociado);
+
 }

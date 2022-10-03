@@ -7,10 +7,17 @@ import org.springframework.stereotype.Repository;
 
 import com.suely.crudcadastro.entidades.Dependente;
 
+
 @Repository
 public interface DependenteRepository extends JpaRepository<Dependente, Long> {
 
     Dependente findByCpfDependente(Long cpf);
 
-    List<Dependente> findByAssociado(Long id);
+
+    List<Dependente> findByAssociadoIdAssociado(Long associadoIdAssociado);
+
+    
+
+
+    //Associado getAssociado(Long id);
 }

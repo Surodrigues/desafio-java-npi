@@ -3,7 +3,7 @@
 		
 			
 	<button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">
-		<a style="text-decoration: none;color: white;" th:href="@{'/novoassociado'}">Cadastrar novo associado</a>
+		<a style="text-decoration: none;color: white;" th:href="@{'associado/salvar'}">Cadastrar novo associado</a>
 	</button>		
 					
 	<h1 class="display-2" style="margin-bottom: 20px;">Cadastro Teste</h1>
@@ -27,7 +27,7 @@
 		<tbody>
 
 			<!-- for(Associado associado: Associado) -->
-				<tr th:each="associado: ${listaassociados}">
+				<tr th:each="associado: ${associados}">
 					<!-- Isso aqui em cima é um ForEach -->
 
 					<th th:text="${associado.idAssociado}" scope="row">id</th>
@@ -42,20 +42,20 @@
 					<td>
 						<!-- botão editar -->
 						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'editarassociado/'+ ${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+							<a th:href="@{'associado/editar/'+ ${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
 						</button>
 					</td>
 					<td>	
 						<!-- botão mostrar dependentes -->
 						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'listardependentes/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-list"></i></a>
+							<a th:href="@{'listadependentes/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-list"></i></a>
 						</button>
 					</td>
 
 					<td>
 						<!-- botão cadastrar dependente -->
 						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'/novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-list"></i></a>
+							<a th:href="@{'/listadependentes/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-list"></i></a>
 						</button>
 					</td>
 
@@ -63,7 +63,7 @@
 					<!-- botão deletar usuário -->
 					<td>
 						<button type="button" class="btn btn-danger">
-							<a th:href="@{'/deletarassociado/'+${associado.idAssociado}}" 
+							<a th:href="@{'/deletar/'+${associado.idAssociado}}" 
 							   th:data-confirm-delete="|Tem certeza que quer excluir este Associado?|"
 							   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
 							<i style="color: rgb(255, 255, 255);" class="fa-solid fa-trash-can"></i>
@@ -81,3 +81,4 @@
 
 
 <div th:replace="shared/footer"></div>
+

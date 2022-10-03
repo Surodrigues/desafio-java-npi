@@ -24,20 +24,31 @@ public class AssociadoService {
         List<Associado> associados = repo.findAll();
 
         for(Associado a : associados){
-            System.out.println(a.getNome());
+            System.out.println(a.getNomeAssociado());
         }
         return repo.findAll();
     }
 
+    
     // PROCURAR POR CPF ==================
-    public Associado procurarAssociado(Long cpfAssociado){
-        return repo.findByCpf(cpfAssociado);
+    public Associado procurarAssociado(Long cpf_associado){
+        Associado a = repo.findByCpfAssociado(cpf_associado);
+        return a;
+    }
+
+    // PROCURAR POR ID ==============
+    public Associado procurarAssociadoPorId(Long id){
+        Associado a = repo.findByIdAssociado(id);
+        return a;
     }
     
     // EDITAR ====================
-    public Associado editarAssociado(Long idAssociado){
-        return repo.findById(idAssociado).get();
+    public Associado editarAssociado(Long id_associado){
+        Associado a = repo.findByIdAssociado(id_associado);
+        return a;
     }
+
+    
     
     // DELETAR ===================
     public void deletarAssociado(Long idAssociado){
