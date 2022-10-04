@@ -2,6 +2,7 @@ package com.suely.crudcadastro;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,54 +22,76 @@ import com.suely.crudcadastro.servico.DependenteService;
 public class CrudcadastroController {
 
     @Autowired
-    private AssociadoService associadoServico;
+    private AssociadoService aService;
 
     @Autowired
-    private DependenteService dependenteServico;
+    private DependenteService dService;
 
 
     // INDEX LISTAR ASSOCIADOS =================
     @RequestMapping("/")
     public String paginaInicial(Model model){
-        List<Associado> associado = associadoServico.listarAssociados();
-        associado.sort(Comparator.comparing(Associado::getNomeAssociado));
-
-        for(Associado a : associado){
-            System.out.println(a.getNomeAssociado());
-        }
-
-        model.addAttribute("listaassociados", associado);
+        List<Associado> associados = aService.listarAssociados();
+        associados.sort(Comparator.comparing(Associado::getNomeAssociado));
+        model.addAttribute("listaassociados", associados);
         return "index";
     }
 
+
     // CADASTRO ASSOCIADOS NOVO ================
     @RequestMapping("/novoassociado")
-    public String novoAssociado(Model model){
+    public String cadastroAssociado(Model model){
         Associado associado = new Associado();
         model.addAttribute("associado", associado);
-        return "associadocadastro";
+        return "cadastroassociado";
     }
+
 
     // SALVAR ASSOCIADO ========================
     @PostMapping("/salvarassociado")
     public String salvarAssociado(@ModelAttribute("associado") Associado associado){
-        associadoServico.adicionarAssociado(associado);
+        aService.adicionarAssociado(associado);
         return "redirect:/";
     }
 
+    // LISTAR DEPENDENTES ======================
+/*     @RequestMapping("/dependentes")
+    public String listaDependentes(Model model){
+        List<Dependente> dependente = dService.listarDependentes();
+    }
+ */ 
+
+
+
+    @RequestMapping("/dependentes/{associado}")
+    public String dependentes(Model model, @PathVariable(name = "associado") Long associado){
+        List<Dependente> dependente = dService.listarDependentes(associado);
+
+        //aService.retornaNome(associado);
+        dependente.sort(Comparator.comparing(Dependente::getNomeDependente));
+        
+        for(Dependente d : dependente){
+            System.out.println(d.getNomeDependente());
+        }
+
+        model.addAttribute("listadependentes", dependente);
+        return "listadependentes";
+    }
+
+
     // EDITAR ASSOCIADO ========================
-    @RequestMapping("/editarassociado/{idAssociado}")
-    public ModelAndView paginaEditarAssociado(@PathVariable(name = "idAssociado") Long id){
+    @RequestMapping("/editarassociado/{id}")
+    public ModelAndView editarAssociado(@PathVariable(name = "id") Long id){
         ModelAndView mav = new ModelAndView("editarassociado");
-        Associado associado = associadoServico.editarAssociado(id);
+        Optional<Associado> associado = aService.editarAssociado(id);
         mav.addObject("associado", associado);
         return mav;
     }
 
     // DELETAR ASSOCIADO =======================
-    @RequestMapping("deletarassociado/{idAssociado}")
-    public String deletarAssociado(@PathVariable(name = "idAssociado") Long id){
-        associadoServico.deletarAssociado(id);
+    @RequestMapping("/deletarassociado/{id}")
+    public String deletarAssociado(@PathVariable("id") Long id){
+        aService.deletarAssociado(id);
         return "redirect:/";
     }
     
@@ -77,64 +100,38 @@ public class CrudcadastroController {
     //==========================================
 
 
-    // LISTAR DEPENDENTES DO ASSOCIADO =========
-/*     @RequestMapping("/listardependentesdoassociado")
-    public String listaDependentes(Model model){
-        Associado a = associadoServico.procurarAssociadoPorId(null)
-        List<Dependente> dependente = dependenteServico.listarDependentes(null) ;
-        dependente.sort(Comparator.comparing(Dependente::getNomeDependente));
-        model.addAttribute("dependente", dependente);
-        return "listardependentesdoassociado";
-    } */
-
-    @RequestMapping("/listardependentes/{idAssociado}")
-    public ModelAndView paginaDependentes(@PathVariable(name = "idAssociado") Long id) {
-        ModelAndView mav = new ModelAndView("listardependentes");
-        List<Dependente> dependente = dependenteServico.listarDependentes(id);
-        mav.addObject("dependente", dependente);
-        return mav;
-
-
-
-        /* @RequestMapping("/editarassociado/{idAssociado}")
-        public ModelAndView paginaEditarAssociado(@PathVariable(name = "idAssociado") Long id){
-            ModelAndView mav = new ModelAndView("editarassociado");
-            Associado associado = associadoServico.editarAssociado(id);
-            mav.addObject("associado", associado);
-            return mav;
-        } */
-
-    }
-
-    // CADASTRAR DEPENDENTE NOVO ===============
-    @RequestMapping("/novodependente")
-    public String novoDependente(Model model){
+    // CADASTRO DEPENDENTE NOVO ================
+    @RequestMapping("/novodependente/{id}")
+    public String cadastrodepende(Model model, @PathVariable("id") Long id){
         Dependente dependente = new Dependente();
+        dependente.setAssociado(id);
         model.addAttribute("dependente", dependente);
-        return "dependentecadastro";
+        return "cadastrodependente";
     }
 
-    // SALVAR DEPENDENTE =======================
-    @RequestMapping("/salvardependente")
-    public String salvarDependente(@ModelAttribute("dependente") Dependente dependente){
-        dependenteServico.adicionarDependente(dependente);
-        return "listardependentes";
+    // SALVAR DEPENDENTE ========================
+    @PostMapping("/salvardependente")
+    public String salvarDependente(@ModelAttribute("dependente") Dependente dependente, @PathVariable(name = "id") Long id){
+        dependente.setAssociado(id);
+        dService.adicionarDependente(dependente);
+       
+        return "redirect:/";
     }
 
-    // EDITAR DEPENDENTE =======================
-    @RequestMapping("/editardependente/{idDependente}")
-    public ModelAndView paginaEditarDependente(@PathVariable(name = "idDependente") Long id){
-        ModelAndView mav = new ModelAndView("editarassociado");
-        Dependente dependente = dependenteServico.editarDependente(id);
+    // EDITAR DEPENDENTE ========================
+    @RequestMapping("/editardependente/{id}")
+    public ModelAndView editarDependente(@PathVariable(name = "id") Long id){
+        ModelAndView mav = new ModelAndView("editardependente");
+        Dependente dependente = dService.editarDependente(id);
         mav.addObject("dependente", dependente);
         return mav;
     }
 
-    // DELETAR DEPENDENTE ======================
-    @RequestMapping("/deletardependente/{idDependente}")
-    public String deletarDependente(@PathVariable(name = "idDependente") Long id){
-        dependenteServico.deletarDependente(id);
-        return "redirect:/listardependentes";
+    // DELETAR DEPENDENTE =======================
+    @RequestMapping("/deletardependente/{id}")
+    public String deletarDependente(@PathVariable("id") Long id){
+        dService.deletarDependente(id);
+        return "redirect:/dependentes";
     }
     
 }

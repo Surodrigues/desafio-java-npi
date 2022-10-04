@@ -1,6 +1,7 @@
 package com.suely.crudcadastro.repositorio;
 
-import java.util.List;
+import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,13 +12,7 @@ import com.suely.crudcadastro.entidades.Dependente;
 @Repository
 public interface DependenteRepository extends JpaRepository<Dependente, Long> {
 
-    Dependente findByCpfDependente(Long cpf);
+    Optional<Dependente> findByCpfDependente(Long cpf);
 
-
-    List<Dependente> findByAssociadoIdAssociado(Long associadoIdAssociado);
-
-    
-
-
-    //Associado getAssociado(Long id);
+    Collection<Dependente> findByAssociado(Long associado);
 }

@@ -1,6 +1,7 @@
 package com.suely.crudcadastro.servico;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,21 +32,28 @@ public class AssociadoService {
 
     
     // PROCURAR POR CPF ==================
-    public Associado procurarAssociado(Long cpf_associado){
-        Associado a = repo.findByCpfAssociado(cpf_associado);
-        return a;
+    public Optional<Associado> procurarPorCpf(Long cpf){
+        Optional<Associado> associado = repo.findByCpfAssociado(cpf);
+        return associado;
     }
 
     // PROCURAR POR ID ==============
-    public Associado procurarAssociadoPorId(Long id){
-        Associado a = repo.findByIdAssociado(id);
-        return a;
+    public Optional<Associado> procurarPorId(Long id){
+        Optional<Associado> associado = repo.findById(id);
+        return associado;
     }
+    // RETORNAR O NOME PELA ID =========
+    public String retornaNome(Long id){
+        Optional<Associado> associado = repo.findById(id);
+        return associado.get().getNomeAssociado();
+
+    }
+
     
     // EDITAR ====================
-    public Associado editarAssociado(Long id_associado){
-        Associado a = repo.findByIdAssociado(id_associado);
-        return a;
+    public Optional<Associado> editarAssociado(Long id){
+        Optional<Associado> associado = repo.findById(id);
+        return associado;
     }
 
     

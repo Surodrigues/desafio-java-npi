@@ -3,13 +3,14 @@ package com.suely.crudcadastro.entidades;
 import java.math.BigDecimal;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+
 
 @Entity
 public class Associado {
@@ -20,22 +21,30 @@ public class Associado {
     @Column(name = "cpf_associado", unique = true, nullable = false)
     private Long cpfAssociado;
     @Column(name = "nome_associado", nullable = false, length = 50)
-    private String nomeAssociado;    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "associado")
-    private List<Dependente> dependentes;
+    private String nomeAssociado;   
     @Column(nullable = false, precision = 7, scale = 2)
     private BigDecimal renda;
     private boolean ativo = true;
 
+    @OneToMany(mappedBy = "associado")
+    private List<Dependente> dependentes;
+    
+    
+/*     @JoinTable(name = "id_dependente")
+    private List<Long> dependentes; */
+
+
+
 
 
     // CONTRUTOR ======================================
-    public Associado(){};    
+    public Associado(){};
 
-    public Associado(Long cpf, String nome, BigDecimal renda) {
-        this.cpfAssociado = cpf;
-        this.nomeAssociado = nome;
+    public Associado(Long cpfAssociado, String nomeAssociado, BigDecimal renda, boolean ativo) {
+        this.cpfAssociado = cpfAssociado;
+        this.nomeAssociado = nomeAssociado;
         this.renda = renda;
+        this.ativo = ativo;
     }
 
 
@@ -64,6 +73,24 @@ public class Associado {
         this.nomeAssociado = nomeAssociado;
     }
 
+    public BigDecimal getRenda() {
+        return renda;
+    }
+
+    public void setRenda(BigDecimal renda) {
+        this.renda = renda;
+    }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+        
+
     public List<Dependente> getDependentes() {
         return dependentes;
     }
@@ -72,38 +99,19 @@ public class Associado {
         this.dependentes = dependentes;
     }
 
-    public BigDecimal getRenda() {
-        return renda;
-    }
+    
 
-    public void setRenda(BigDecimal renda) {
-        this.renda = renda;
-    }
-   
 
-    public boolean isAtivo() {
-        if(this.ativo){
-            System.out.println("ativo");
-        } else {
-            System.out.println("inativo");
-        }
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
 
     
-        
+
+
+    // TOSTRING ======================================
     @Override
     public String toString() {
-        return "Associado [ativo=" + this.isAtivo() + ", cpf=" + cpfAssociado + ", id=" + idAssociado
-                + ", nome=" + nomeAssociado + ", renda=" + renda + "]";
+        return "Associado [idAssociado=" + idAssociado + ", cpfAssociado=" + cpfAssociado + ", nomeAssociado="
+                + nomeAssociado + ", renda=" + renda + ", ativo=" + ativo + ", dependentes=" + dependentes + "]";
     }
 
-    
-
-    
 
 }
