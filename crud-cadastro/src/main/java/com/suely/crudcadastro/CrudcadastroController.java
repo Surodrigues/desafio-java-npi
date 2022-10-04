@@ -55,28 +55,7 @@ public class CrudcadastroController {
     }
 
     // LISTAR DEPENDENTES ======================
-/*     @RequestMapping("/dependentes")
-    public String listaDependentes(Model model){
-        List<Dependente> dependente = dService.listarDependentes();
-    }
- */ 
 
-
-
-    @RequestMapping("/dependentes/{associado}")
-    public String dependentes(Model model, @PathVariable(name = "associado") Long associado){
-        List<Dependente> dependente = dService.listarDependentes(associado);
-
-        //aService.retornaNome(associado);
-        dependente.sort(Comparator.comparing(Dependente::getNomeDependente));
-        
-        for(Dependente d : dependente){
-            System.out.println(d.getNomeDependente());
-        }
-
-        model.addAttribute("listadependentes", dependente);
-        return "listadependentes";
-    }
 
 
     // EDITAR ASSOCIADO ========================
@@ -87,6 +66,17 @@ public class CrudcadastroController {
         mav.addObject("associado", associado);
         return mav;
     }
+
+    // EDITAR ASSOCIADO SALVANDO DEPENDENTE =================
+    @RequestMapping("editarassociadosalvandodependente/{id}")
+    public ModelAndView editarAssocSalvDep(@PathVariable("id") Long id){
+        ModelAndView mav = new ModelAndView("edicaoassociadoadicionandodependente");
+        Optional<Associado> associado = aService.editarAssociado(id);
+        
+        mav.
+    }
+
+
 
     // DELETAR ASSOCIADO =======================
     @RequestMapping("/deletarassociado/{id}")
@@ -101,22 +91,13 @@ public class CrudcadastroController {
 
 
     // CADASTRO DEPENDENTE NOVO ================
-    @RequestMapping("/novodependente/{id}")
-    public String cadastrodepende(Model model, @PathVariable("id") Long id){
-        Dependente dependente = new Dependente();
-        dependente.setAssociado(id);
-        model.addAttribute("dependente", dependente);
-        return "cadastrodependente";
-    }
+    
+
+
 
     // SALVAR DEPENDENTE ========================
-    @PostMapping("/salvardependente")
-    public String salvarDependente(@ModelAttribute("dependente") Dependente dependente, @PathVariable(name = "id") Long id){
-        dependente.setAssociado(id);
-        dService.adicionarDependente(dependente);
-       
-        return "redirect:/";
-    }
+    
+
 
     // EDITAR DEPENDENTE ========================
     @RequestMapping("/editardependente/{id}")

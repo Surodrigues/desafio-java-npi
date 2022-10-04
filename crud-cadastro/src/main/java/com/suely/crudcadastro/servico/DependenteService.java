@@ -24,8 +24,9 @@ public class DependenteService {
 
     // ADICIONAR
     public void adicionarDependente(Dependente dependente){
-        dependente.setAssociado(null);
         repo.save(dependente);
+        /* dependente.setAssociado(null);
+        repo.save(dependente); */
     }    
 
     // LISTAR DEPENDENTES DO ASSOCIADO PELA ID DO ASSOCIADO==========

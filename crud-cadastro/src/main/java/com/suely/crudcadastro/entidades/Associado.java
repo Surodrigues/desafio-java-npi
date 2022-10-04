@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
 
@@ -26,7 +27,8 @@ public class Associado {
     private BigDecimal renda;
     private boolean ativo = true;
 
-    @OneToMany(mappedBy = "associado")
+    @OneToMany(orphanRemoval = true)
+    @JoinColumn(name="id_dependente")
     private List<Dependente> dependentes;
     
     
@@ -49,6 +51,16 @@ public class Associado {
 
 
     // GETTERS E SETTERS ==============================
+    public List<Dependente> getDependentes() {
+        return dependentes;
+    }
+    @JoinColumn(name = "id_associado")
+    public void setDependentes(List<Dependente> dependentes) {
+        this.dependentes = dependentes;
+    }
+
+    
+
     public Long getIdAssociado() {
         return idAssociado;
     }
@@ -91,13 +103,7 @@ public class Associado {
 
         
 
-    public List<Dependente> getDependentes() {
-        return dependentes;
-    }
 
-    public void setDependentes(List<Dependente> dependentes) {
-        this.dependentes = dependentes;
-    }
 
     
 
