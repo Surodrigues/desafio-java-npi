@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 
 
@@ -27,39 +27,27 @@ public class Associado {
     private BigDecimal renda;
     private boolean ativo = true;
 
-    @OneToMany(orphanRemoval = true)
-    @JoinColumn(name="id_dependente")
+    @OneToMany(targetEntity = Dependente.class)
+    @Transient
     private List<Dependente> dependentes;
-    
-    
-/*     @JoinTable(name = "id_dependente")
-    private List<Long> dependentes; */
 
 
 
 
+    public Associado(){}
 
-    // CONTRUTOR ======================================
-    public Associado(){};
-
-    public Associado(Long cpfAssociado, String nomeAssociado, BigDecimal renda, boolean ativo) {
+    public Associado(Long cpfAssociado, String nomeAssociado, BigDecimal renda, boolean ativo,
+            List<Dependente> dependentes) {
         this.cpfAssociado = cpfAssociado;
         this.nomeAssociado = nomeAssociado;
         this.renda = renda;
         this.ativo = ativo;
-    }
-
-
-    // GETTERS E SETTERS ==============================
-    public List<Dependente> getDependentes() {
-        return dependentes;
-    }
-    @JoinColumn(name = "id_associado")
-    public void setDependentes(List<Dependente> dependentes) {
         this.dependentes = dependentes;
     }
 
-    
+
+
+
 
     public Long getIdAssociado() {
         return idAssociado;
@@ -101,23 +89,28 @@ public class Associado {
         this.ativo = ativo;
     }
 
-        
-
-
-
     
-
-
-
-    
-
-
-    // TOSTRING ======================================
-    @Override
-    public String toString() {
-        return "Associado [idAssociado=" + idAssociado + ", cpfAssociado=" + cpfAssociado + ", nomeAssociado="
-                + nomeAssociado + ", renda=" + renda + ", ativo=" + ativo + ", dependentes=" + dependentes + "]";
+    public List<Dependente> getDependentes() {
+        return dependentes;
     }
+    
+    public void setDependentes(List<Dependente> dependentes) {
+        this.dependentes = dependentes;
+    }
+
+    
+
+
+    
+
+
+    
+
+
+
+
+
+    
 
 
 }

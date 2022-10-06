@@ -2,57 +2,57 @@
 
 <!-- CONTEÚDO -->
 <form class="form-horizontal" th:action="@{/salvarassociado}" th:object="${associado}" method="post">
-    <fieldset>
+  <fieldset>
+  
+    <!-- Form Name -->
+    <legend>Editar Associado</legend>
+
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">ID</label>  
+      <div class="col-md-4">
+        <input type="text" th:field="*{idAssociado}" readonly class="form-control input-md">            
+      </div>
+    </div>
     
-      <!-- Form Name -->
-      <legend>Editar Associado</legend>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">CPF</label>  
+      <div class="col-md-4">
+        <input type="text" th:field="*{cpfAssociado}" placeholder="apenas números" class="form-control input-md"  minlength="11" maxlength="11">
+        <!-- onkeypress="$(this).mask('000.000.000-00');"  retirar máscara para salvar!  -->             
+      </div>
+    </div>
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">ID</label>  
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Nome</label>  
         <div class="col-md-4">
-          <input id="id" type="text" th:field="*{idAssociado}" name="id" readonly="readonly" class="form-control input-md">            
+        <input type="text" th:field="*{nomeAssociado}" placeholder="nome completo" class="form-control input-md" minlength="5" maxlength="50">
         </div>
-      </div>
-      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">CPF</label>  
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Renda</label>  
         <div class="col-md-4">
-          <input id="cpf" type="text" th:field="*{cpfAssociado}" name="cpf" placeholder="apenas números" class="form-control input-md"  minlength="11" maxlength="11">
-          <!-- onkeypress="$(this).mask('000.000.000-00');"  retirar máscara para salvar!  -->             
+        <input type="text" th:field="*{renda}" placeholder="separe os centavos com ponto(0.00)" class="form-control input-md">
+          <!-- onkeypress="$(this).mask('R$ ##.###,##', {reverse: true});" retirar máscara para salvar! -->
+        
         </div>
-      </div>
+    </div>
 
-      <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Nome</label>  
-          <div class="col-md-4">
-          <input type="text" th:field="*{nomeAssociado}" name="nome" placeholder="nome completo" class="form-control input-md" minlength="5" maxlength="50">
-          </div>
-      </div>
-
-      <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Renda</label>  
-          <div class="col-md-4">
-          <input type="text" th:field="*{renda}" name="renda" placeholder="separe os centavos com ponto(0.00)" class="form-control input-md">
-            <!-- onkeypress="$(this).mask('R$ ##.###,##', {reverse: true});" retirar máscara para salvar! -->
-          
-          </div>
-      </div>
-
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" th:field="*{ativo}" name="ativo" value="" id="defaultCheck1">
-        <label class="form-check-label" for="defaultCheck1">Ativo</label>
-      </div>
-      
-      <!-- Button -->
-      <div class="form-group">
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-success">Cadastrar</button>
-          <a href="/" class="btn btn-inverse" style="margin: 10px;">cancelar</a>
-        </div>
-      </div>
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" th:field="*{ativo}" name="ativo" value="" id="defaultCheck1">
+      <label class="form-check-label" for="defaultCheck1">Ativo</label>
+    </div>
     
-    </fieldset>
-  </form>
+    <!-- Button -->
+    <div class="form-group">
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+        <a href="/" class="btn btn-inverse" style="margin: 10px;">cancelar</a>
+      </div>
+    </div>
+  
+  </fieldset>
+</form>
 
 <div th:replace="shared/footer"></div>

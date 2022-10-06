@@ -3,54 +3,48 @@
 
 
 
-  <form class="form-horizontal" action="#" th:action="@{/salvardependente}" th:object="${dependente}" method="post">
-    <fieldset>
+
+
+<form class="form-horizontal" action="#" th:action="@{/salvardependente}" th:object="${dependente}" method="post">
+  <fieldset>
+  
+    <!-- Form Name -->
+    <legend>Cadastro de Dependente</legend>   
     
-      <!-- Form Name -->
-      <legend>Cadastro de Dependente</legend>
+    <!-- Text input-->
+    <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">CPF</label>  
+      <div class="col-md-4">
+        <input id="cpf" type="text" th:field="*{cpfDependente}" name="cpf" placeholder="apenas números" class="form-control input-md"  minlength="11" maxlength="11">
+        <!-- onkeypress="$(this).mask('000.000.000-00');"  retirar máscara para salvar!  -->             
+      </div>
+    </div>
 
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">ID</label>  
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Nome</label>  
         <div class="col-md-4">
-          <input id="id" type="text" th:value="${id}" name="id" readonly class="form-control input-md">            
+          <input type="text" th:field="*{nomeDependente}" name="nome" placeholder="nome completo" class="form-control input-md" minlength="5" maxlength="50">
         </div>
-      </div>
-      
-      <!-- Text input-->
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="textinput">CPF</label>  
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label" for="textinput">Idade</label>  
         <div class="col-md-4">
-          <input id="cpf" type="text" th:field="*{cpfDependente}" name="cpf" placeholder="apenas números" class="form-control input-md"  minlength="11" maxlength="11">
-          <!-- onkeypress="$(this).mask('000.000.000-00');"  retirar máscara para salvar!  -->             
+          <input type="text" th:field="*{idade}" name="idade" placeholder="" class="form-control input-md">
+        
         </div>
-      </div>
-
-      <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Nome</label>  
-          <div class="col-md-4">
-            <input type="text" th:field="*{nomeDependente}" name="nome" placeholder="nome completo" class="form-control input-md" minlength="5" maxlength="50">
-          </div>
-      </div>
-
-      <div class="form-group">
-          <label class="col-md-4 control-label" for="textinput">Idade</label>  
-          <div class="col-md-4">
-            <input type="text" th:field="*{idade}" name="idade" placeholder="" class="form-control input-md">
-          
-          </div>
-      </div>
-
-      
-      <!-- Button -->
-      <div class="form-group">
-        <div class="col-md-4">
-          <button type="submit" class="btn btn-success">Cadastrar</button>
-          <a href="/" class="btn btn-inverse" style="margin: 10px;">cancelar</a>
-        </div>
-      </div>
+    </div>
     
-    </fieldset>
-  </form>
+    <!-- Button -->
+    <div class="form-group">
+      <div class="col-md-4">
+        <button type="submit" class="btn btn-success">Cadastrar</button>
+        <a href="/" class="btn btn-inverse" style="margin: 10px;">cancelar</a>
+      </div>
+    </div>
+  
+  </fieldset>
+</form>
 
           
   

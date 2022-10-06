@@ -29,14 +29,14 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">ID</label>  
                     <div class="col-md-4">
-                    <input id="id" type="text" th:field="*{idAssociado}" name="id" readonly class="form-control input-md">            
+                    <input id="idAssociado" type="text" th:field="*{associado.idAssociado}" name="idAssociado" readonly class="form-control input-md">            
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">Nome</label>  
                     <div class="col-md-4">
-                    <input type="text" th:field="*{nomeAssociado}" name="nome" placeholder="" readonly class="form-control input-md" minlength="5" maxlength="50">
+                    <input id="nomeAssociado" type="text" th:field="*{associado.nomeAssociado}" name="nomeAssociado" placeholder="" readonly class="form-control input-md" minlength="5" maxlength="50">
                     </div>
                 </div> 
 
@@ -45,20 +45,14 @@
             <!-- ======================== DEPENDENTE ========================================= -->
             <fieldset>    
                 <!-- Form Name -->
-                <legend>Cadastro de Dependente</legend>
-        
-                <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">ID</label>  
-                <div class="col-md-4">
-                    <input id="id" type="text" th:value="${id}" name="id" readonly class="form-control input-md">            
-                </div>
-                </div>
+                <legend>Cadastro de Dependente</legend>        
+                
                 
                 <!-- Text input-->
                 <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">CPF</label>  
                 <div class="col-md-4">
-                    <input id="cpf" type="text" th:field="*{cpfDependente}" name="cpf" placeholder="apenas números" class="form-control input-md"  minlength="11" maxlength="11">
+                    <input id="cpfDependente" type="text" th:field="*{dependente.cpfDependente}" name="cpfDependente" placeholder="apenas números" class="form-control input-md"  minlength="11" maxlength="11">
                     <!-- onkeypress="$(this).mask('000.000.000-00');"  retirar máscara para salvar!  -->             
                 </div>
                 </div>
@@ -66,14 +60,14 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">Nome</label>  
                     <div class="col-md-4">
-                    <input type="text" th:field="*{nomeDependente}" name="nome" placeholder="nome completo" class="form-control input-md" minlength="5" maxlength="50">
+                    <input id="nomeDependente" type="text" th:field="*{dependente.nomeDependente}" name="nomeDependente" placeholder="nome completo" class="form-control input-md" minlength="5" maxlength="50">
                     </div>
                 </div>
         
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">Idade</label>  
                     <div class="col-md-4">
-                    <input type="text" th:field="*{idade}" name="idade" placeholder="" class="form-control input-md">
+                    <input type="text" th:field="*{dependente.idade}" name="idade" placeholder="" class="form-control input-md">
                     
                     </div>
                 </div>
