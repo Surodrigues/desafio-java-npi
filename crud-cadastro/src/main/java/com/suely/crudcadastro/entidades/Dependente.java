@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 
@@ -24,26 +23,13 @@ public class Dependente {
     @Column(nullable = false)
     private int idade;
 
-    @ManyToOne(targetEntity = Associado.class)
-    @JoinColumn(name ="dependente_id_associado")
-    private Long associado;
+    @ManyToOne
+    private Associado associado;
 
 
 
 
-
-
-    public Dependente(){}    
-
-    public Dependente(Long cpfDependente, String nomeDependente, int idade, Long associado) {
-        this.cpfDependente = cpfDependente;
-        this.nomeDependente = nomeDependente;
-        this.idade = idade;
-        this.associado = associado;
-    }
-
-
-    
+    public Dependente(){}        
 
 
     
@@ -78,14 +64,20 @@ public class Dependente {
 
     public void setIdade(int idade) {
         this.idade = idade;
-    }    
-    public Long getAssociado() {
+    }
+
+
+    public Associado getAssociado() {
         return associado;
     }
-    
-    public void setAssociado(Long associado) {
+
+
+    public void setAssociado(Associado associado) {
         this.associado = associado;
     }
+
+
+    
 
     
 

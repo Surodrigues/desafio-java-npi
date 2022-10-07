@@ -1,9 +1,23 @@
 <div th:replace="shared/header"></div>
 
+
+
+<form class="form-inline">
+	<div class="form-group mb-2">
+	  <label for="staticEmail2" class="sr-only"></label>
+	  <input type="text" readonly class="form-control-plaintext" id="" value="Pesquisar Associado">
+	</div>
+	<div class="form-group mx-sm-3 mb-2">
+	  <label for="inputPassword2" class="sr-only"></label>
+	  <input type="text" class="form-control" id="inputPassword2" placeholder="digite o CPF">
+	</div>
+	<button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+  </form>
+
 		
 			
 	<button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">
-		<a style="text-decoration: none;color: white;" th:href="@{'/novoassociado'}">Cadastrar novo associado</a>
+		<a style="text-decoration: none;color: white;" th:href="@{'novoassociado'}">Cadastrar novo associado</a>
 	</button>		
 					
 	<h1 class="display-2" style="margin-bottom: 20px;">Cadastro Teste</h1>
@@ -12,28 +26,21 @@
 	<table class="table" id="keywords" style="margin-top: 60px;">
 		<thead>
 			<tr>
-				<th scoe="col">ID</th>
+				<th scope="col">ID</th>
 				<th scope="col">Nome</th>
-				<th scope="col">CPF</th>
-				<th scope="col">Renda</th>
 				<th scope="col">Ativo</th>
-				<th scope="col">Editar</th>
-				<th scope="col">Ver Dependentes</th>
-				<th scope="col">Adicionar Dependente</th>
-				<th scope="col">Deletar</th>
+				<th scope="col">Ver</th>
 			</tr>
 		</thead>
 
 		<tbody>
 
 			<!-- for(Associado associado: Associado) -->
-				<tr th:each="associado: ${listaassociados}">
+				<tr th:each="associado: ${associados}">
 					<!-- Isso aqui em cima é um ForEach -->
 
 					<th th:text="${associado.idAssociado}" scope="row">id</th>
 					<td th:text="${associado.nomeAssociado}">Nome</td>
-					<td th:text="${associado.cpfAssociado}">CPF</td>
-					<td th:text="${associado.renda}">Renda</td>
 					<!-- <td th:text="${associado.ativo}">Ativo</td> -->
 					<td>
 						<input th:checked="${associado.ativo}" type="checkbox" class="form-check-input" disabled>
@@ -42,33 +49,8 @@
 					<td>
 						<!-- botão editar -->
 						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'editarassociado/'+${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+							<a th:href="@{'associado/'+${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-arrow-up-right-from-square"></i></a>
 						</button>
-					</td>
-					<td>	
-						<!-- botão mostrar dependentes -->
-						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'listardependentes/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-list"></i></a>
-						</button>
-					</td>
-
-					<td>
-						<!-- botão cadastrar dependente -->
-						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'/novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-list"></i></a>
-						</button>
-					</td>
-
-
-					<!-- botão deletar usuário -->
-					<td>
-						<button type="button" class="btn btn-danger">
-							<a th:href="@{'/deletarassociado/'+${associado.idAssociado}}" 
-							   th:data-confirm-delete="|Tem certeza que quer excluir este Associado?|"
-							   onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
-							<i style="color: rgb(255, 255, 255);" class="fa-solid fa-trash-can"></i>
-							</a>
-						</button>	
 					</td>
 					
 				</tr>	

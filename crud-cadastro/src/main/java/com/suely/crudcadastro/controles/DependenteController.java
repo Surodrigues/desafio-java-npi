@@ -1,49 +1,52 @@
 package com.suely.crudcadastro.controles;
 
-import java.util.Comparator;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.suely.crudcadastro.entidades.Associado;
 import com.suely.crudcadastro.entidades.Dependente;
 import com.suely.crudcadastro.servico.AssociadoService;
 import com.suely.crudcadastro.servico.DependenteService;
 
+
 @Controller
 public class DependenteController {
 
-    @Autowired
-    public DependenteService dService;
+
     @Autowired
     public AssociadoService aService;
+    @Autowired
+    public DependenteService dService;
+    
 
 
 
-    // *** Não funciona pois não está associando o dependente ao associado ***
-    // pagina cadastro
-    @RequestMapping("/listardependentes/{id}")
-    public String paginaDependentes(Model model, @PathVariable("id") Long id){
-        
-        List<Dependente> dependente = dService.buscarDependentes(id);
-        dependente.sort(Comparator.comparing(Dependente::getNomeDependente));
-        model.addAttribute("listardependentes", dependente);
-        return "/dependentes";        
+    // página cadastro dependente
+    @RequestMapping(value = "/novodependente/{id}", method = RequestMethod.POST)
+    public ModelAndView cadastrarDependente(@PathVariable("id") Long id, Dependente dependente){
+        Associado associado = aService.buscarPorId(id);
+        dependente.setAssociado(associado);
+        dService.salvarDependente(dependente);
+        return "redirect:/{id}";
     }
 
-    @RequestMapping("/novodependente/{id}")
-    public String paginaCadastroDependente(Model model, @PathVariable("id") Long id){
-        //Associado associado = aService.buscarPorId(id);
-        Dependente dependente = dService.setarAssociado(id);
+
+
+    /* public String cadastrarDependente(Model model, @PathVariable("id") Long id, Associado associado){
+        associado = aService.buscarPorId(id);
+        Dependente dependente = new Dependente();        
+        dependente.setAssociado(associado);
         model.addAttribute("dependente", dependente);
-        return "cadastrodependente";
-    }
+        return "redirect:/associado/{id}";
+    } */
 
     // salvar
     @PostMapping("/salvardependente")
@@ -53,7 +56,7 @@ public class DependenteController {
     }
 
     // editar
-    @RequestMapping("/editardependente/{id}")
+    @GetMapping("/editardependente/{id}")
     public ModelAndView editarDependente(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("editarassociado");
         Dependente dependente = dService.buscarPorId(id);

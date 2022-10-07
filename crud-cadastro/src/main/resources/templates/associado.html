@@ -1,0 +1,98 @@
+<div th:replace="shared/header"></div>
+
+<div>
+    <a href="/">index</a>
+</div>
+
+<!-- Dados do Associado -->
+<h1 class="display-4" style="margin-bottom: 20px;">Associado</h1>
+<table class="table" id="keywords" style="margin-top: 60px;">
+    <thead>
+        <tr>
+            <th scoe="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Renda</th>
+            <th scope="col">Ativo</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Adicionar Dependente</th>
+            <th scope="col">Deletar</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th th:text="${associado.idAssociado}" scope="row">id</th>
+            <td th:text="${associado.nomeAssociado}">Nome</td>
+            <td th:text="${associado.cpfAssociado}">CPF</td>
+            <td th:text="${associado.renda}">Renda</td>
+            <!-- <td th:text="${associado.ativo}">Ativo</td> -->
+            <td>
+                <input th:checked="${associado.ativo}" type="checkbox" class="form-check-input" disabled>
+            </td>
+            <td>
+                <!-- botão editar associado-->
+                <button type="button" class="btn btn-secondary">
+                    <a th:href="@{'/editarassociado/'+ ${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+                </button>
+            </td>                
+            <td>
+                <!-- botão cadastrar dependente -->
+                <button type="button" class="btn btn-secondary">
+                    <a th:href="@{'novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-regular fa-user"></i></a>
+                </button>
+            </td>
+            <!-- botão deletar associado -->
+            <td>
+                <button type="button" class="btn btn-danger">
+                    <a th:href="@{'/deletarassociado/'+${associado.idAssociado}}" 
+                        th:data-confirm-delete="|Tem certeza que quer excluir este Associado?|"
+                        onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
+                    <i style="color: rgb(255, 255, 255);" class="fa-solid fa-trash-can"></i>
+                    </a>
+                </button>	
+            </td>            
+        </tr>	        
+    </tbody>    
+</table>
+
+
+<!-- Dados dependentes -->
+<h1 class="display-6" style="margin-bottom: 20px;">Dependentes</h1>
+<table class="table" id="keywords" style="margin-top: 60px;">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nome</th>
+            <th scope="col">CPF</th>
+            <th scope="col">Idade</th>
+            <th scope="col">Editar</th>
+            <th scope="col">Deletar</th>
+        </tr>
+    </thead>    
+    <tbody>                            
+            <tr th:each="dependentes: ${listardependentes}">    
+                <th th:text="${dependentes.idDependente}" scope="row">id</th>
+                <td th:text="${dependentes.nomeDependente}">Nome</td>
+                <td th:text="${dependentes.cpfDependente}">CPF</td>
+                <td th:text="${dependentes.idade}">idade</td>
+                    <!-- botão editar -->
+                    <button type="button" class="btn btn-secondary" style="margin-right: 15px;">
+                        <a th:href="@{'/editardependente/'+ ${dependente.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+                    </button>
+                </td>
+                <td>	
+                    <!-- botão deletar -->
+                    <button type="button" class="btn btn-outline-danger">
+                        <a th:href="@{'/deletardependente/'+ ${dependente.idDependente}}"><i style="color: black;" class="fa-solid fa-trash-can" onclick=confirmaExcluir()></i></a>
+                    </button>
+                </td>                    
+            </tr>	            
+    </tbody>        
+</table>
+
+
+
+
+
+
+<div th:replace="shared/footer"></div>

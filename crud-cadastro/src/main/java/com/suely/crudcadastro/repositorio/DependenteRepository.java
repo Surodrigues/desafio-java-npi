@@ -11,7 +11,7 @@ import com.suely.crudcadastro.entidades.Dependente;
 @Repository
 public interface DependenteRepository extends JpaRepository<Dependente, Long> {
 
-    List<Dependente> findAllByAssociado(Long id);
+    List<Dependente> findAllByAssociado(Long idAssociado);
 
     Dependente findByCpfDependente(Long cpf);
 

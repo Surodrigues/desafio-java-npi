@@ -9,7 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 
 
 
@@ -27,24 +26,13 @@ public class Associado {
     private BigDecimal renda;
     private boolean ativo = true;
 
-    @OneToMany(targetEntity = Dependente.class)
-    @Transient
+    @OneToMany
     private List<Dependente> dependentes;
 
 
 
 
     public Associado(){}
-
-    public Associado(Long cpfAssociado, String nomeAssociado, BigDecimal renda, boolean ativo,
-            List<Dependente> dependentes) {
-        this.cpfAssociado = cpfAssociado;
-        this.nomeAssociado = nomeAssociado;
-        this.renda = renda;
-        this.ativo = ativo;
-        this.dependentes = dependentes;
-    }
-
 
 
 

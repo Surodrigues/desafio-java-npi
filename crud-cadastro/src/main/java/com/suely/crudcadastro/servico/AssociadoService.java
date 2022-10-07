@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.suely.crudcadastro.entidades.Associado;
-import com.suely.crudcadastro.entidades.Dependente;
 import com.suely.crudcadastro.repositorio.AssociadoRepository;
 
 @Service
@@ -20,11 +19,11 @@ public class AssociadoService {
     public List<Associado> listarAssociados(){
         return Arepo.findAll();
     }
-        //por CPF
+        //buscar por CPF
     public Associado buscarPorCpf(Long cpf){
         return Arepo.findByCpfAssociado(cpf);        
     }
-        //por ID
+        //buscar por ID
     public Associado buscarPorId(Long id){
         return Arepo.findById(id).get();
     }
@@ -42,16 +41,7 @@ public class AssociadoService {
     // deletar
     public void deletarAssociado(Long id){
         Arepo.deleteById(id);
-    }
-
-    // buscar dependentes
-    public List<Dependente> buscarDependentes(Long id){
-        Associado associado = Arepo.findById(id).get();
-        List<Dependente> dependentes = associado.getDependentes();
-        return dependentes;
-    }
-
-       
+    }    
     
     
 }

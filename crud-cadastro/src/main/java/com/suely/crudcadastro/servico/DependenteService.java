@@ -15,18 +15,18 @@ public class DependenteService {
     DependenteRepository Drepo;
 
     
-    // listar todos por id do associado
-    public List<Dependente> buscarDependentes(Long id){
-        List<Dependente> dependentes = Drepo.findAllByAssociado(id);
+    // buscar por associado
+    public List<Dependente> buscarDependentes(Long idAssociado){
+        List<Dependente> dependentes = Drepo.findAllByAssociado(idAssociado);
         return dependentes;
     }
         // buscar por cpf
-    public Dependente buscarDependente(Long cpf){
+    public Dependente buscarDepCpf(Long cpf){
         return Drepo.findByCpfDependente(cpf);
     }
         // buscar por id
     public Dependente buscarPorId(Long id){
-        return Drepo.findByCpfDependente(id);
+        return Drepo.findById(id).get();
     }
 
     // salvar
@@ -44,12 +44,5 @@ public class DependenteService {
         Drepo.deleteById(id);
     }
 
-
-
-    public Dependente setarAssociado(Long id){
-        Dependente dependente = new Dependente();
-        dependente.setAssociado(id);
-        return dependente;
-    }
     
 }
