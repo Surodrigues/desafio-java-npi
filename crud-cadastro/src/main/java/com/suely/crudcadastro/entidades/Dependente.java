@@ -26,10 +26,15 @@ public class Dependente {
     private Associado associado;
 
 
+    public Dependente(){} 
 
 
-    public Dependente(){}        
-
+    public Dependente(Long cpfDependente, String nomeDependente, int idade, Associado associado) {
+        this.cpfDependente = cpfDependente;
+        this.nomeDependente = nomeDependente;
+        this.idade = idade;
+        this.associado = associado;
+    }   
 
     
 

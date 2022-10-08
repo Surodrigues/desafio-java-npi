@@ -33,18 +33,19 @@ public class AssociadoController {
         return "index";
     }
     
+    //FAZ A CONSULTA DOS DEPENDENTES MAS NÃO RENDERIZA
     // página associado
     @RequestMapping("associado/{id}")
     public ModelAndView buscarAssociado(@PathVariable("id") Long id){
         Associado associado = aService.buscarPorId(id);
         ModelAndView mav = new ModelAndView("associado");
         mav.addObject("associado", associado);
-        List<Dependente> dependentes = associado.getDependentes();
-        mav.addObject("dependentes", dependentes);
+        List<Dependente> dependente = associado.getDependentes();
+        mav.addObject("dependente", dependente);
         return mav;
     }
 
-    
+    // procura por cpf
     @RequestMapping("cpf/{cpf}")
     public ModelAndView buscaAssociadoCpf(@PathVariable("cpf") Long cpf){
         Associado associado = aService.buscarPorCpf(cpf);
@@ -66,7 +67,7 @@ public class AssociadoController {
 
     // salvar
     @PostMapping("/salvarassociado")
-    public String salvarAssociado(Model model, Associado associado){
+    public String salvarAssociado(Associado associado){
         aService.salvarAssociado(associado);
         return "redirect:/";
     }
@@ -86,19 +87,6 @@ public class AssociadoController {
         aService.deletarAssociado(id);
         return "redirect:/";
     } 
-    
-    
-
-
-    /* @RequestMapping(value = "/novodependente/{id}", method = RequestMethod.GET)
-    public ModelAndView cadastrarDependente(@PathVariable("id") Long idAssociado){
-        Associado associado = aService.buscarPorId(idAssociado);
-        Dependente dependente = new Dependente();
-        dependente.setAssociado(associado);
-        ModelAndView mav = new ModelAndView("cadastrodependente");
-        mav.addObject("dependente", dependente);       
-        return mav;
-    } */
 
 
 }

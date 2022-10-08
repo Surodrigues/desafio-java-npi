@@ -27,7 +27,7 @@ public class AssociadoService {
     public Associado buscarPorId(Long id){
         return Arepo.findById(id).get();
     }
-
+    
     // salvar
     public void salvarAssociado(Associado associado){
         Arepo.save(associado);

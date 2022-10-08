@@ -3,7 +3,6 @@
 <div>
     <a href="/">index</a>
 </div>
-
 <!-- Dados do Associado -->
 <h1 class="display-4" style="margin-bottom: 20px;">Associado</h1>
 <table class="table" id="keywords" style="margin-top: 60px;">
@@ -38,7 +37,7 @@
             <td>
                 <!-- botão cadastrar dependente -->
                 <button type="button" class="btn btn-secondary">
-                    <a th:href="@{'/novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-regular fa-user"></i></a>
+                    <a th:href="@{'/dependente/novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-regular fa-user"></i></a>
                 </button>
             </td>
             <!-- botão deletar associado -->
@@ -54,8 +53,6 @@
         </tr>	        
     </tbody>    
 </table>
-
-
 <!-- Dados dependentes -->
 <h1 class="display-6" style="margin-bottom: 20px;">Dependentes</h1>
 <table class="table" id="keywords" style="margin-top: 60px;">
@@ -70,20 +67,20 @@
         </tr>
     </thead>    
     <tbody>                            
-            <tr th:each="dependentes: ${listardependentes}">    
-                <th th:text="${dependentes.idDependente}" scope="row">id</th>
-                <td th:text="${dependentes.nomeDependente}">Nome</td>
-                <td th:text="${dependentes.cpfDependente}">CPF</td>
-                <td th:text="${dependentes.idade}">idade</td>
+            <tr th:each="dependente: ${dependente}">    
+                <th th:text="${dependente.idDependente}" scope="row">id</th>
+                <td th:text="${dependente.nomeDependente}">Nome</td>
+                <td th:text="${dependente.cpfDependente}">CPF</td>
+                <td th:text="${dependente.idade}">idade</td>
                     <!-- botão editar -->
                     <button type="button" class="btn btn-secondary" style="margin-right: 15px;">
-                        <a th:href="@{'dependente/editardependente/'+ ${dependente.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+                        <a th:href="@{'/dependente/editardependente/'+ ${dependente.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
                     </button>
                 </td>
                 <td>	
                     <!-- botão deletar -->
                     <button type="button" class="btn btn-outline-danger">
-                        <a th:href="@{'dependente/deletardependente/'+ ${dependente.idDependente}}"><i style="color: black;" class="fa-solid fa-trash-can" onclick=confirmaExcluir()></i></a>
+                        <a th:href="@{'/dependente/deletardependente/'+ ${dependente.idDependente}}"><i style="color: black;" class="fa-solid fa-trash-can" onclick=confirmaExcluir()></i></a>
                     </button>
                 </td>                    
             </tr>	            

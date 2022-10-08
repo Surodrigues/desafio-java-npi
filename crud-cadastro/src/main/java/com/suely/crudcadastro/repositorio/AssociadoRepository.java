@@ -11,4 +11,7 @@ public interface AssociadoRepository extends JpaRepository<Associado, Long>{
     
 
     Associado findByCpfAssociado(Long cpf);
+
+    
+
 }

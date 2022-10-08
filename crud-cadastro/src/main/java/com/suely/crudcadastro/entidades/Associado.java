@@ -28,13 +28,22 @@ public class Associado {
     private boolean ativo = true;
 
     @OneToMany
-    @Transient
     private List<Dependente> dependentes;
 
 
 
-
     public Associado(){}
+
+
+
+    public Associado(Long cpfAssociado, String nomeAssociado, BigDecimal renda, boolean ativo,
+            List<Dependente> dependentes) {
+        this.cpfAssociado = cpfAssociado;
+        this.nomeAssociado = nomeAssociado;
+        this.renda = renda;
+        this.ativo = ativo;
+        this.dependentes = dependentes;
+    }
 
 
 
