@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 
 
@@ -27,6 +28,7 @@ public class Associado {
     private boolean ativo = true;
 
     @OneToMany
+    @Transient
     private List<Dependente> dependentes;
 
 

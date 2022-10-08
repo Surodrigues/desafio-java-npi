@@ -9,8 +9,15 @@
   <fieldset>
   
     <!-- Form Name -->
-    <legend>Cadastro de Dependente</legend>   
+    <legend>Cadastro de Dependente</legend>
     
+<!--     <div class="form-group">
+      <label class="col-md-4 control-label" for="textinput">Idade</label>  
+      <div class="col-md-4">
+        <input type="text" th:field="*{associado}" name="idade" readonly placeholder="" class="form-control input-md">      
+      </div>
+    </div>  -->     
+
     <!-- Text input-->
     <div class="form-group">
       <label class="col-md-4 control-label" for="textinput">CPF</label>  
@@ -30,8 +37,7 @@
     <div class="form-group">
         <label class="col-md-4 control-label" for="textinput">Idade</label>  
         <div class="col-md-4">
-          <input type="text" th:field="*{idade}" name="idade" placeholder="" class="form-control input-md">
-        
+          <input type="text" th:field="*{idade}" name="idade" placeholder="" class="form-control input-md">        
         </div>
     </div>
     

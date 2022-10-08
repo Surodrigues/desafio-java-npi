@@ -38,7 +38,7 @@
             <td>
                 <!-- botão cadastrar dependente -->
                 <button type="button" class="btn btn-secondary">
-                    <a th:href="@{'novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-regular fa-user"></i></a>
+                    <a th:href="@{'/novodependente/'+${associado.idAssociado}}" style="text-decoration:none;"><i style="color: rgb(255, 255, 255);" class="fa-regular fa-user"></i></a>
                 </button>
             </td>
             <!-- botão deletar associado -->
@@ -77,13 +77,13 @@
                 <td th:text="${dependentes.idade}">idade</td>
                     <!-- botão editar -->
                     <button type="button" class="btn btn-secondary" style="margin-right: 15px;">
-                        <a th:href="@{'/editardependente/'+ ${dependente.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+                        <a th:href="@{'dependente/editardependente/'+ ${dependente.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
                     </button>
                 </td>
                 <td>	
                     <!-- botão deletar -->
                     <button type="button" class="btn btn-outline-danger">
-                        <a th:href="@{'/deletardependente/'+ ${dependente.idDependente}}"><i style="color: black;" class="fa-solid fa-trash-can" onclick=confirmaExcluir()></i></a>
+                        <a th:href="@{'dependente/deletardependente/'+ ${dependente.idDependente}}"><i style="color: black;" class="fa-solid fa-trash-can" onclick=confirmaExcluir()></i></a>
                     </button>
                 </td>                    
             </tr>	            

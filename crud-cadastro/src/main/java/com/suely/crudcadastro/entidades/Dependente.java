@@ -19,8 +19,7 @@ public class Dependente {
     @Column(name = "cpf_dependente", unique = true)
     private Long cpfDependente;
     @Column(name = "nome_dependente", length = 50, nullable = false)
-    private String nomeDependente;    
-    @Column(nullable = false)
+    private String nomeDependente;
     private int idade;
 
     @ManyToOne

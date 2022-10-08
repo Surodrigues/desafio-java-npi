@@ -2,8 +2,6 @@ package com.suely.crudcadastro.controles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +16,7 @@ import com.suely.crudcadastro.servico.DependenteService;
 
 
 @Controller
+@RequestMapping("/dependente")
 public class DependenteController {
 
 
@@ -25,20 +24,20 @@ public class DependenteController {
     public AssociadoService aService;
     @Autowired
     public DependenteService dService;
-    
 
 
-
-    // página cadastro dependente
-    @RequestMapping(value = "/novodependente/{id}", method = RequestMethod.POST)
-    public ModelAndView cadastrarDependente(@PathVariable("id") Long id, Dependente dependente){
-        Associado associado = aService.buscarPorId(id);
+   
+    // PQ NÃO ABRE????
+    // página cadastro dependente 
+    @RequestMapping(value = "/novodependente/{id}", method = RequestMethod.GET)
+    public ModelAndView cadastrarDependente(@PathVariable("id") Long idAssociado){
+        Associado associado = aService.buscarPorId(idAssociado);
+        Dependente dependente = new Dependente();
         dependente.setAssociado(associado);
-        dService.salvarDependente(dependente);
-        return "redirect:/{id}";
+        ModelAndView mav = new ModelAndView("cadastrodependente");
+        mav.addObject("dependente", dependente);       
+        return mav;
     }
-
-
 
     /* public String cadastrarDependente(Model model, @PathVariable("id") Long id, Associado associado){
         associado = aService.buscarPorId(id);
@@ -49,6 +48,8 @@ public class DependenteController {
     } */
 
     // salvar
+
+
     @PostMapping("/salvardependente")
     public String salvarDependente(@ModelAttribute("dependente") Dependente dependente){
         dService.salvarDependente(dependente);
@@ -56,7 +57,7 @@ public class DependenteController {
     }
 
     // editar
-    @GetMapping("/editardependente/{id}")
+    @RequestMapping("/editardependente/{id}")
     public ModelAndView editarDependente(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("editarassociado");
         Dependente dependente = dService.buscarPorId(id);
