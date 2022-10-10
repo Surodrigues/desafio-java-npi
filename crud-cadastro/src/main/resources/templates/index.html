@@ -1,74 +1,65 @@
 <div th:replace="shared/header"></div>
 
-
-<form class="d-inline-flex form-inline" action="#" th:action="@{'cpf/'+${associado.cpfAssociado}}" th:object="${associado}" method="post">
-	<!-- inputs -->
-	<div class="row">           
-	  <div class="col-auto">
-		<div class="row align-items-center">
-		  <div class="col-auto">
-			<label class="" for="inlineFormInputName2">CPF:</label>
-		  </div>
-		  <div class="col-auto">
-			<input type="text" th:field="*{cpfAssociado}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
-		  </div>
-		</div> 
-	  
-	  <!-- botões -->
-	  <div class="col-auto">
-		<div class="row align-items-start">
-		  <div class="col">
-			<button type="submit" class="btn btn-success mb-2">Gravar</button>                  
-		  </div>        
-		</div>      
-	  </div> 
-	</div>  
-  </form>
-
-		
-			
-	<button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">
-		<a style="text-decoration: none;color: white;" th:href="@{'novoassociado'}">Cadastrar novo associado</a>
-	</button>		
+<!-- nav começo -->
+<ul class="nav d-flex justify-content-between">
+	<li class="nav-item">
+		<button type="button" class="btn btn-secondary" style="margin-bottom: 20px;">
+			<a style="text-decoration: none;color: white;" th:href="@{'novoassociado'}">Cadastrar novo associado</a>
+		</button>
+	</li>
+	<li class="nav-item">
+		<form action="#" th:action="@{'/buscaassociadocpf'}" method="get">
+			<div class="d-inline-flex">
+				<!-- inputs -->
+				<input type="text" name="cpf" class="form-control mb-2 mr-sm-2">
+			</div>
+			<div class="d-inline-flex">
+				<!-- botões -->
+				<button type="submit" class="btn btn-success mb-2">Pesquisar</button> 
+			</div>
+		</form>
+	</li>
+</ul>
+<!-- nav fim -->
 					
-	<h1 class="display-2" style="margin-bottom: 20px;">Cadastro Teste</h1>
+<h1 class="display-2" style="margin-bottom: 20px;">Cadastro Teste</h1>
 
 
-	<table class="table" id="keywords" style="margin-top: 60px;">
-		<thead>
-			<tr>
-				<th scope="col">ID</th>
-				<th scope="col">Nome</th>
-				<th scope="col">Ativo</th>
-				<th scope="col">Ver</th>
-			</tr>
-		</thead>
+<table class="table" id="keywords" style="margin-top: 60px;">
+	<thead>
+		<tr>
+			<th scope="col">ID</th>
+			<th scope="col">Nome</th>
+			<th scope="col">Ativo</th>
+			<th scope="col">Ver</th>
+		</tr>
+	</thead>
 
-		<tbody>
+	<tbody>
 
-			<!-- for(Associado associado: Associado) -->
-				<tr th:each="associado: ${associados}">
-					<!-- Isso aqui em cima é um ForEach -->
+		<!-- for(Associado associado: Associado) -->
+			<tr th:each="associado: ${associados}">
+				<!-- Isso aqui em cima é um ForEach -->
 
-					<th th:text="${associado.idAssociado}" scope="row">id</th>
-					<td th:text="${associado.nomeAssociado}">Nome</td>
-					<!-- <td th:text="${associado.ativo}">Ativo</td> -->
-					<td>
-						<input th:checked="${associado.ativo}" type="checkbox" class="form-check-input" disabled>
-					</td>
+				<th th:text="${associado.idAssociado}" scope="row">id</th>
+				<td th:text="${associado.nomeAssociado}">Nome</td>
+				<!-- <td th:text="${associado.ativo}">Ativo</td> -->
+				<td>
+					<input th:checked="${associado.ativo}" type="checkbox" class="form-check-input" disabled>
+				</td>
 
-					<td>
-						<!-- botão editar -->
-						<button type="button" class="btn btn-secondary">
-							<a th:href="@{'associado/'+${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-arrow-up-right-from-square"></i></a>
-						</button>
-					</td>
-					
-				</tr>	
-			
-		</tbody>
+				<td>
+					<!-- botão editar -->
+					<button type="button" class="btn btn-secondary">
+						<a th:href="@{'associado/'+${associado.idAssociado}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-arrow-up-right-from-square"></i></a>
+					</button>
+				</td>
+				
+			</tr>	
 		
-	</table>	
+	</tbody>
+	
+</table>	
 
 
 

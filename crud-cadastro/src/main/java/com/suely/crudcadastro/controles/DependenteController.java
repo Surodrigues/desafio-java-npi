@@ -2,9 +2,9 @@ package com.suely.crudcadastro.controles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.suely.crudcadastro.entidades.Associado;
@@ -14,7 +14,7 @@ import com.suely.crudcadastro.servico.DependenteService;
 
 
 @Controller
-@RequestMapping("/dependente")
+@RequestMapping("/dependentes")
 public class DependenteController {
 
 
@@ -38,14 +38,20 @@ public class DependenteController {
     }
 
     // salvar
-    @RequestMapping("/salvardependente")
-    public String salvarDependente(@ModelAttribute("dependente") Dependente dependente){
+    @RequestMapping(value = "/salvardependente", method = RequestMethod.POST)
+    public ModelAndView salvarDependentePost(Dependente dependente){
+        ModelAndView mav = new ModelAndView("associado");
+        mav.addObject("dependente", dependente);
+        dService.salvarDependente(dependente);
+        return mav;
+    }
+    /* public String salvarDependente(@ModelAttribute("dependente") Dependente dependente){
         dService.salvarDependente(dependente);
         return "redirect:/";
-    }
+    } */
 
     // editar
-    @RequestMapping("/editardependente/{id}")
+    @RequestMapping(value = "/editardependente/{id}", method = RequestMethod.GET)
     public ModelAndView editarDependente(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("editardependente");
         Dependente dependente = dService.buscarPorId(id);

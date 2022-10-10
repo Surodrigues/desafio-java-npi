@@ -14,7 +14,5 @@ public interface DependenteRepository extends JpaRepository<Dependente, Long> {
 
     List<Dependente> findByAssociado(Associado associado);
 
-    Dependente findByCpfDependente(Long cpf);
-
 
 }

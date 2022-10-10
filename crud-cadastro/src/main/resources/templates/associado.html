@@ -74,13 +74,13 @@
                 <!-- botão editar -->
             <td>
                 <button type="button" class="btn btn-secondary" style="margin-right: 15px;">
-                    <a th:href="@{'/dependente/editardependente/'+ ${dependentes.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
+                    <a th:href="@{'/dependentes/editardependente/'+ ${dependentes.idDependente}}"><i style="color: rgb(255, 255, 255);" class="fa-solid fa-pen-to-square"></i></a>
                 </button> 
             </td>
             <td>	
                 <!-- botão deletar -->
                 <button type="button" class="btn btn-outline-danger">
-                <a th:href="@{'/dependente/deletardependente/'+ ${dependentes.idDependente}}"
+                <a th:href="@{'/dependentes/deletardependente/'+ ${dependentes.idDependente}}"
                 th:data-confirm-delete="|Tem certeza que quer excluir este Dependente?|"
                 onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false"><i style="color: black;" class="fa-solid fa-trash-can"></i></a>
                 </button>

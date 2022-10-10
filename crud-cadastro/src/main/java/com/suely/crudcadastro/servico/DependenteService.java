@@ -21,10 +21,7 @@ public class DependenteService {
         List<Dependente> dependentes = Drepo.findByAssociado(associado);
         return dependentes;
     }
-        // buscar por cpf
-    public Dependente buscarDepCpf(Long cpf){
-        return Drepo.findByCpfDependente(cpf);
-    }
+    
         // buscar por id
     public Dependente buscarPorId(Long id){
         return Drepo.findById(id).get();

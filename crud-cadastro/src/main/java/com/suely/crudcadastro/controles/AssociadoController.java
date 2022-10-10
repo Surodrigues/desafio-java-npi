@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.suely.crudcadastro.entidades.Associado;
@@ -33,9 +35,8 @@ public class AssociadoController {
         return "index";
     }
     
-    //FAZ A CONSULTA DOS DEPENDENTES MAS NÃO RENDERIZA
     // página associado
-    @RequestMapping("associado/{id}")
+    @RequestMapping(value = "associado/{id}", method = RequestMethod.GET)
     public ModelAndView buscarAssociado(@PathVariable("id") Long id){
         ModelAndView mav = new ModelAndView("associado");
         Associado associado = aService.buscarPorId(id);        
@@ -46,8 +47,8 @@ public class AssociadoController {
     }
 
     // procura por cpf
-    @RequestMapping("cpf/{cpf}")
-    public ModelAndView buscaAssociadoCpf(@PathVariable("cpf") Long cpf){
+    @RequestMapping(value = "/buscaassociadocpf", method = RequestMethod.GET)
+    public ModelAndView buscaAssociadoCpf(@RequestParam(name = "cpf") Long cpf){
         Associado associado = aService.buscarPorCpf(cpf);
         ModelAndView mav = new ModelAndView("associado");
         mav.addObject("associado", associado);
