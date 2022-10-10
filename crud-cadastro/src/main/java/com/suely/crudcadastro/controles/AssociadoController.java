@@ -37,11 +37,11 @@ public class AssociadoController {
     // página associado
     @RequestMapping("associado/{id}")
     public ModelAndView buscarAssociado(@PathVariable("id") Long id){
-        Associado associado = aService.buscarPorId(id);
         ModelAndView mav = new ModelAndView("associado");
+        Associado associado = aService.buscarPorId(id);        
         mav.addObject("associado", associado);
-        List<Dependente> dependente = associado.getDependentes();
-        mav.addObject("dependente", dependente);
+        List<Dependente> dependentes = dService.buscarDependentes(associado);
+        mav.addObject("dependentes", dependentes);
         return mav;
     }
 

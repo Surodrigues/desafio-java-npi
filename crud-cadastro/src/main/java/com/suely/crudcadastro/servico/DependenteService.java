@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.suely.crudcadastro.entidades.Associado;
 import com.suely.crudcadastro.entidades.Dependente;
 import com.suely.crudcadastro.repositorio.DependenteRepository;
 
@@ -16,8 +17,8 @@ public class DependenteService {
 
     
     // buscar por associado
-    public List<Dependente> buscarDependentes(Long idAssociado){
-        List<Dependente> dependentes = Drepo.findAllByAssociado(idAssociado);
+    public List<Dependente> buscarDependentes(Associado associado){
+        List<Dependente> dependentes = Drepo.findByAssociado(associado);
         return dependentes;
     }
         // buscar por cpf

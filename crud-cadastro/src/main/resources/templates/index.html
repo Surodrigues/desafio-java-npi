@@ -1,17 +1,28 @@
 <div th:replace="shared/header"></div>
 
 
-
-<form class="form-inline">
-	<div class="form-group mb-2">
-	  <label for="staticEmail2" class="sr-only"></label>
-	  <input type="text" readonly class="form-control-plaintext" id="" value="Pesquisar Associado">
-	</div>
-	<div class="form-group mx-sm-3 mb-2">
-	  <label for="inputPassword2" class="sr-only"></label>
-	  <input type="text" class="form-control" id="inputPassword2" placeholder="digite o CPF">
-	</div>
-	<button type="submit" class="btn btn-primary mb-2">Pesquisar</button>
+<form class="d-inline-flex form-inline" action="#" th:action="@{'cpf/'+${associado.cpfAssociado}}" th:object="${associado}" method="post">
+	<!-- inputs -->
+	<div class="row">           
+	  <div class="col-auto">
+		<div class="row align-items-center">
+		  <div class="col-auto">
+			<label class="" for="inlineFormInputName2">CPF:</label>
+		  </div>
+		  <div class="col-auto">
+			<input type="text" th:field="*{cpfAssociado}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
+		  </div>
+		</div> 
+	  
+	  <!-- botões -->
+	  <div class="col-auto">
+		<div class="row align-items-start">
+		  <div class="col">
+			<button type="submit" class="btn btn-success mb-2">Gravar</button>                  
+		  </div>        
+		</div>      
+	  </div> 
+	</div>  
   </form>
 
 		

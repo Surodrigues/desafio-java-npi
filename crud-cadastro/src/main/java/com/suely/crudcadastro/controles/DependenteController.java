@@ -47,7 +47,7 @@ public class DependenteController {
     // editar
     @RequestMapping("/editardependente/{id}")
     public ModelAndView editarDependente(@PathVariable("id") Long id){
-        ModelAndView mav = new ModelAndView("editarassociado");
+        ModelAndView mav = new ModelAndView("editardependente");
         Dependente dependente = dService.buscarPorId(id);
         mav.addObject("dependente", dependente);
         return mav;
@@ -56,7 +56,7 @@ public class DependenteController {
     @RequestMapping("/deletardependente/{id}")
     public String deletarDependente(@PathVariable("id") Long id){
         dService.deletarDependente(id);
-        return "/";
+        return "redirect:/";
     }
    
 

@@ -19,15 +19,15 @@ public class Associado {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_associado")
     private Long idAssociado;
-    @Column(name = "cpf_associado", unique = true, nullable = false)
+    @Column(name = "cpf_associado")
     private Long cpfAssociado;
-    @Column(name = "nome_associado", nullable = false, length = 50)
+    @Column(name = "nome_associado")
     private String nomeAssociado;   
-    @Column(nullable = false, precision = 7, scale = 2)
     private BigDecimal renda;
     private boolean ativo = true;
 
     @OneToMany
+    @Transient
     private List<Dependente> dependentes;
 
 

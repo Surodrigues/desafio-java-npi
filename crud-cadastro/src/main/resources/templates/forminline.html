@@ -1,0 +1,48 @@
+<!-- formulário inline -->
+
+<form class="d-inline-flex form-inline" action="#" th:action="@{/dependente/salvardependente}" th:object="${dependente}" method="post">
+  <!-- inputs -->
+  <div class="row">           
+    <div class="col-auto">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label class="" for="inlineFormInputName2">CPF:</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" th:field="*{cpfDependente}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
+        </div>
+      </div> 
+    </div>
+    <div class="col-auto">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label class="" for="inlineFormInputName2">Nome:</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" th:field="*{nomeDependente}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2"> 
+        </div>
+      </div>       
+    </div>
+    <div class="col-auto">
+      <div class="row align-items-center">
+        <div class="col-auto">
+          <label class="" for="inlineFormInputName2">Idade:</label>
+        </div>
+        <div class="col-auto">
+          <input type="text" th:field="*{idade}" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2">
+        </div>         
+      </div>
+    </div>
+    <!-- botões -->
+    <div class="col-auto">
+      <div class="row align-items-start">
+        <div class="col">
+          <button type="submit" class="btn btn-success mb-2">Gravar</button>
+        </div>
+        <div class="col align-items-start">
+          <a href="" class="btn btn-inverse">cancelar</a>                      
+        </div>        
+      </div>      
+    </div> 
+  </div>  
+</form>

@@ -16,9 +16,9 @@ public class Dependente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_dependente")
     private Long idDependente;
-    @Column(name = "cpf_dependente", unique = true)
+    @Column(name = "cpf_dependente")
     private Long cpfDependente;
-    @Column(name = "nome_dependente", length = 50, nullable = false)
+    @Column(name = "nome_dependente")
     private String nomeDependente;
     private int idade;
 
